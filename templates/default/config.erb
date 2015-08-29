@@ -2,9 +2,8 @@
   "datacenter": "<%= node['consul']['datacenter'] %>",
   "data_dir": "<%= node['consul']['data_dir'] %>",
   "log_level": "<%= node['consul']['log_level'] %>",
-  "node_name": "<%= node['consul']['node_name'] %>",
+  "node_name": "<%= node['fqdn'] %>",
   "bind_addr": "<%= node['consul']['bind_addr'] %>",
-  "advertise_addr": "<%= node['consul']['advertise_addr'] %>",
   "domain": "<%= node['consul']['domain'] %>",
   "recursor": "<%= node['consul']['recursor'] %>",
   "encrypt": "<%= node['consul']['encrypt'] %>",
@@ -16,6 +15,9 @@
   "verify_incoming": <%= node['consul']['verify_incoming'] %>,
 <%- end %>
   "server": <%= node['consul']['server'] %>,
-  "bootstrap": <%= node['consul']['bootstrap'] %>,
-  "start_join": <%= node['consul']['start_join'] %>
+<%- if node['consul']['server'] %>
+  "bootstrap_expect": <%= node['consul']['bootstrap_expect'] %>,
+<%- end %>
+  "start_join": <%= node['consul']['start_join'] %>,
+  "enable_syslog": <%= node['consul']['enable_syslog'] %>
 }

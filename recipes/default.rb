@@ -18,18 +18,11 @@
 # limitations under the License.
 #
 
-include_recipe 'chef-sugar::default'
+::Chef::Recipe.send(:include, Express42::Network)
 
-package 'unzip'
-package 'curl'
+listen_addr = net_get_private(node)[0][1]
 
-remote_file node['jq']['path'] do
-  source node['jq']['url']
-  owner 'root'
-  group 'root'
-  mode '00755'
-  action :create
-end
+#node.default['consul']['bind_addr'] = listen_addr
 
 directory node['consul']['config_path'] do
   owner 'root'
@@ -79,47 +72,6 @@ template node['consul']['config_file_path'] do
   group 'root'
   mode '0744'
   notifies :restart, 'service[consul]', :delayed
-end
-
-remote_file node['consul']['tmp'] do
-  source node['consul']['url']
-  checksum node['consul']['checksum']
-  owner 'root'
-  group 'root'
-  mode 00755
-end
-
-ark 'consul' do
-  url node['consul']['url']
-  has_binaries ['consul']
-  version '0.5rc1'
-  mode 00755
-  action :install
-end
-
-remote_file node['web_ui']['tmp'] do
-  source node['web_ui']['url']
-  owner 'root'
-  group 'root'
-  mode 00755
-end
-
-directory node['web_ui']['destination'] do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  recursive true
-  action :create
-end
-
-bash 'extract consul web_ui' do
-  user 'root'
-  cwd node['web_ui']['destination']
-  code <<-EOH
-    unzip -u node['web_ui']['tmp']
-    mv dist/* . && rm -rf dist
-  EOH
-  not_if { ::File.exist?("#{node['web_ui']['destination']}/index.html") }
 end
 
 cookbook_file '/usr/bin/consulkv' do

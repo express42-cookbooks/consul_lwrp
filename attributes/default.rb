@@ -18,16 +18,7 @@
 # limitations under the License.
 #
 
-default['consul']['filename'] = 'consul-0.5rc1-amd64.zip'
-default['consul']['url'] = 'http://shared.froese.org/2015/consul-0.5rc1-amd64.zip'
-# default['consul']['checksum'] = '2cf6e59edf348c3094c721eb77436e8c789afa2c35e6e3123a804edfeb1744ac'
-default['consul']['tmp'] = "/tmp/#{default['consul']['filename']}"
 default['consul']['destination'] = '/usr/local/bin/consul'
-
-default['web_ui']['filename'] = '0.4.1_web_ui.zip'
-default['web_ui']['url'] = "https://dl.bintray.com/mitchellh/consul/#{default['web_ui']['filename']}"
-default['web_ui']['tmp'] = "/tmp/#{default['web_ui']['filename']}"
-default['web_ui']['destination'] = '/var/consul_web_ui'
 
 default['consul']['config_path'] = '/etc/consul'
 default['consul']['config_d_dir'] = '/etc/consul/config.d'
@@ -44,8 +35,9 @@ default['consul']['domain'] = 'consul.'
 default['consul']['encrypt'] = 'p4T1eTQtKji/Df3VrMMLzg==' # Change me.
 default['consul']['recursor'] = '8.8.8.8'
 default['consul']['server'] = true
-default['consul']['bootstrap'] = true
+default['consul']['bootstrap_expect'] = 3
 default['consul']['start_join'] = ['0.0.0.0']
+default['consul']['enable_syslog'] = true
 
 # If you want to enable RPC encryption, change these defaults
 # And read more here: http://www.consul.io/docs/agent/encryption.html
