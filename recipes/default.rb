@@ -20,6 +20,8 @@
 
 package 'jq'
 
+chef_gem 'diplomat'
+
 directory node['consul']['config_path'] do
   owner 'root'
   group 'root'
@@ -78,5 +80,6 @@ cookbook_file '/usr/bin/consulkv' do
 end
 
 service 'consul' do
-  action [:enable, :start, :reload]
+  action [:enable, :start]
+  supports reload: true, restart: true
 end

@@ -1,0 +1,26 @@
+{
+  "service": {
+    "name": "<%= @resource.name %>",
+
+    <%- if @resource.name %>
+      "name": "<%= @resource.name %>",
+    <%- end %>
+
+    <%- if @resource.id %>
+      "id": "<%= @resource.id %>",
+    <%- end %>
+
+    <%- if @resource.tags %>
+      "tags": [<%= @resource.tags.map { |t| %Q("#{t}") }.join(", ") %>],
+    <%- end %>
+
+    <%- if @resource.address %>
+      "address": "<%= @resource.address %>",
+    <%- end %>
+
+    <%- if @resource.port %>
+      "port": <%= @resource.port %>,
+    <%- end %>
+    "checks": []
+  }
+}
