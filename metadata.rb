@@ -8,5 +8,3 @@ version          '1.0.1'
 recipe           'consul::default', 'Installs/configures consul'
 
 depends 'apt'
-depends 'ark'
-depends 'chef-sugar'
