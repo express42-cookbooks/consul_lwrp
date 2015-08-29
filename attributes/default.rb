@@ -28,9 +28,7 @@ default['consul']['config_file_path'] = "#{node['consul']['config_path']}/config
 
 default['consul']['datacenter'] = 'dc1'
 default['consul']['log_level'] = 'INFO'
-default['consul']['node_name'] = 'consul-random-name'
 default['consul']['bind_addr'] = '0.0.0.0'
-default['consul']['advertise_addr'] = '127.0.0.1' # Change me.
 default['consul']['domain'] = 'consul.'
 default['consul']['encrypt'] = 'p4T1eTQtKji/Df3VrMMLzg==' # Change me.
 default['consul']['recursor'] = '8.8.8.8'

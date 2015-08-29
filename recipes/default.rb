@@ -18,11 +18,7 @@
 # limitations under the License.
 #
 
-::Chef::Recipe.send(:include, Express42::Network)
-
-listen_addr = net_get_private(node)[0][1]
-
-#node.default['consul']['bind_addr'] = listen_addr
+package 'jq'
 
 directory node['consul']['config_path'] do
   owner 'root'
@@ -71,7 +67,7 @@ template node['consul']['config_file_path'] do
   owner 'root'
   group 'root'
   mode '0744'
-  notifies :restart, 'service[consul]', :delayed
+  notifies :reload, 'service[consul]', :delayed
 end
 
 cookbook_file '/usr/bin/consulkv' do
@@ -82,5 +78,5 @@ cookbook_file '/usr/bin/consulkv' do
 end
 
 service 'consul' do
-  action [:enable, :start]
+  action [:enable, :start, :reload]
 end
