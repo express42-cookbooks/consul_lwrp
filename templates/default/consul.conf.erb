@@ -14,5 +14,5 @@ script
   else
     echo "Config file not available."
   fi
-  exec /usr/local/bin/consul agent -config-file <%= node['consul']['config_file_path'] %> $OPTIONS
+  exec /usr/local/bin/consul agent -config-file <%= node['consul']['config_file_path'] %> -config-dir <%= node['consul']['config_d_dir'] %> $OPTIONS
 end script
