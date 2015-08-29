@@ -6,3 +6,5 @@ attribute :type, kind_of: String, name_attribute: true, required: true,
 attribute :handler, :kind_of => String, :required => true
 attribute :event_name, :kind_of => String
 attribute :service, :kind_of => String
+attribute :passingonly, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :tag, :kind_of => String
