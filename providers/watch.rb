@@ -9,19 +9,20 @@ action :create do
     resource_json = {
       type: new_resource.type,
       name: new_resource.event_name,
-      handler: new_resource.handler,
-      passingonly: new_resource.passingonly
+      handler: new_resource.handler
     }
-
-    resource_json[:tag] = new_resource.tag if new_resource.tag
 
     resource_name = "watch-event-#{new_resource.event_name}"
   when 'service'
     resource_json = {
       type: new_resource.type,
       service: new_resource.service,
-      handler: new_resource.handler
+      handler: new_resource.handler,
+      passingonly: new_resource.passingonly
     }
+
+    resource_json[:tag] = new_resource.tag if new_resource.tag
+
     resource_name = "watch-service-#{new_resource.service}"
   else
     raise "Consul watch type #{new_resource.type} not exists or not supported by cookbook"
